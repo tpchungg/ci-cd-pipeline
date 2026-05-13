@@ -23,10 +23,10 @@ jobs:
               uses: actions/checkout@v4
               with:
                 fetch-depth: 0
-#Build image to test
+            #Build image to test
             - name: Build Docker Image
               run: docker build -t myapp:${{ github.sha }} .
-#Test Trivy
+            #Test Trivy
             - name: Run Trivy vulnerability scanner
               uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
               with:
@@ -40,7 +40,7 @@ jobs:
               uses: github/codeql-action/upload-sarif@v3
               with:
                sarif_file: 'trivy-results.sarif'
-#Test pytest          
+             #Test pytest          
             - name: Test #Run container and test
               run: |
                docker run -d -p 8080:8080 --name test-container myapp:${{ github.sha }}
