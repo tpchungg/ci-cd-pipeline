@@ -51,7 +51,7 @@ jobs:
                  exit 1
                fi
 
-#Push image to AWS ECS registry
+#Push image to Docker Hub
     push-to-registry:
         needs: build-and-test
         runs-on: ubuntu-latest
@@ -72,4 +72,3 @@ jobs:
             
             - name: Push image to Docker Hub
               run: docker push ${{ vars.DOCKERHUB_USERNAME }}/myapp:${{ github.sha }}
-              
