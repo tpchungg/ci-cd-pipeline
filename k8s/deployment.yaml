@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-deployment
+  labels:
+    app: my-python-app
+  namepsace: my-python-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-python-app
+  template:
+    metadata:
+      labels:
+        app: my-python-app
+    spec:
+      containers:
+        - name: my-python-container
+          image: tpchungg/my_python_app:2e1ad778aea910197d2c586859819ccdda603eae
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-service
+  namspace: my-python-namespace
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-python-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
