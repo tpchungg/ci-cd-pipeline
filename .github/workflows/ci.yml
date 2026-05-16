@@ -51,15 +51,25 @@ jobs:
                  exit 1
                fi
 
-# #Push image to AWS ECS registry
-#     push-to-registry:
-#         needs: build-and-test
-#         runs-on: ubuntu-latest
-#         steps:
-#             - name: Checkout repository
-#               uses: actions/checkout@v4
-#               with:
-#                 fetch-depth: 0
+#Push image to AWS ECS registry
+    push-to-registry:
+        needs: build-and-test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
 
-#             - name: Build Docker Image
-#               run: docker build -t myapp:${{ github.sha }} .
+            - name: Build Docker Image
+              run: docker build -t myapp:${{ github.sha }} .
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v4
+              with:
+               username: ${{ vars.DOCKERHUB_USERNAME }}
+               password: ${{ secrets.DOCKERHUB_TOKEN }}
+            
+            - name: Push image to Docker Hub
+              run: docker push ${{ vars.DOCKERHUB_USERNAME }}/myapp:${{ github.sha }}
+              
