@@ -25,7 +25,7 @@ jobs:
                 fetch-depth: 0
             #Build image to test
             - name: Build Docker Image
-              run: docker build -t myapp:${{ github.sha }} .
+              run: docker build -t my_python_app:${{ github.sha }} .
             #Test Trivy
             - name: Run Trivy vulnerability scanner
               uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
