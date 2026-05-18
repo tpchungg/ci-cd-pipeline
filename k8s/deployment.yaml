@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: my-python-container
-          image: tpchungg/my_python_app:7db24856d5c54759b114f5637a0dc9779f0affaf
+          image: tpchungg/my_python_app:1df9d39ca9dd95af403e1b1f9faa15bbb24ecbab
           imagePullPolicy: Always
           ports:
           - containerPort: 80
