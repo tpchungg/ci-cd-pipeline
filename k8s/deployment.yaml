@@ -30,7 +30,7 @@ metadata:
   name: my-python-service
   namespace: my-python-namespace
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: my-python-app
   ports:
